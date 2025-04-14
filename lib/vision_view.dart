@@ -25,6 +25,10 @@ class _VisionVideoState extends State<VisionVideo> {
 
   @override
   Widget build(BuildContext context) {
-    return VideoPlayer(controller);
+    return Container(
+      height: 500,
+      width: 500,
+      child: VideoPlayer(controller),
+    );
   }
 }
