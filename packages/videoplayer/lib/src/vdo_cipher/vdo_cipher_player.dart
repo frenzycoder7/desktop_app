@@ -31,7 +31,7 @@ class VdoCipherPlayer extends StatelessWidget {
         aspectRatio: aspectRatio,
         child: Stack(
           fit: !fullScreenNotifier.value ? StackFit.loose : StackFit.expand,
-          children: [],
+          children: const [],
         ),
       ),
     );

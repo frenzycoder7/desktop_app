@@ -1,20 +1,30 @@
+import 'package:desktop_app/LinuxPlayer.dart';
 import 'package:flutter/material.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:videoplayer/videoplayer.dart';
 import 'dart:io';
 
+void setupcodec() {
+  if (Platform.isWindows) {
+    String dir = Directory.current.path;
+    Process.run('powershell', [
+      'Add-AppxPackage',
+      '-Path',
+      '$dir/codec/av1-video-extension-1-3-4-0.appxbundle'
+    ]).then((value) {
+      if (value.exitCode == 0) {
+        debugPrint("installation success");
+      } else {
+        debugPrint("installation failed");
+      }
+    });
+  }
+}
+
 void main() {
-  String dir = Directory.current.path;
-  Process.run('powershell', [
-    'Add-AppxPackage',
-    '-Path',
-    '$dir/codec/av1-video-extension-1-3-4-0.appxbundle'
-  ]).then((value) {
-    if (value.exitCode == 0) {
-      debugPrint("installation success");
-    } else {
-      debugPrint("installation failed");
-    }
-  });
+  WidgetsFlutterBinding.ensureInitialized();
+  MediaKit.ensureInitialized();
+  setupcodec();
   runApp(const PlayerView());
 }
 
@@ -168,13 +178,15 @@ class ViewPlayerView extends StatelessWidget {
           SizedBox(
             height: 500,
             width: double.infinity,
-            child: VisionVideoPlayer(
-              builder: (context, child) {
-                return child;
-              },
-              onControllerChange: (p0) {},
-              videoUrl: url,
-            ),
+            child: Platform.isLinux
+                ? LinuxPlayer(url: url)
+                : VisionVideoPlayer(
+                    builder: (context, child) {
+                      return child;
+                    },
+                    onControllerChange: (p0) {},
+                    videoUrl: url,
+                  ),
           )
         ],
       ),

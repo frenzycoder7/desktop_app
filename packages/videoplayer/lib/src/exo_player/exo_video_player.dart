@@ -148,7 +148,7 @@ class ExoVideoPlayerState extends State<ExoVideoPlayer> {
                                     ),
 
                                     // settings btn
-                                    Align(
+                                    const Align(
                                       alignment: Alignment.topRight,
                                       child: Row(
                                         mainAxisAlignment:
@@ -188,7 +188,7 @@ class ExoVideoPlayerState extends State<ExoVideoPlayer> {
                                     Align(
                                       alignment: Alignment.bottomRight,
                                       child: Padding(
-                                        padding: EdgeInsets.only(bottom: 2),
+                                        padding: const EdgeInsets.only(bottom: 2),
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,

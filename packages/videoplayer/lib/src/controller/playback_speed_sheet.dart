@@ -121,7 +121,7 @@ class PlaybackSpeedSheetState extends State<PlaybackSpeedSheet> {
                                               .primary
                                           : Theme.of(context)
                                               .colorScheme
-                                              .onBackground,
+                                              .onSurface,
                                     ),
                                   ),
                                 )
